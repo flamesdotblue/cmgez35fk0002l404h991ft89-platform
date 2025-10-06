@@ -105,33 +105,12 @@ function ProjectCard({ p, idx }) {
   );
 }
 
-function ExperienceTimeline() {
-  const items = [
-    {
-      role: 'Senior Creative Developer',
-      company: 'Cyberwave Studio',
-      period: '2023 — Present',
-      desc: 'Leading development of immersive brand experiences and web apps with 3D and motion.',
-      hue: 'from-fuchsia-400 to-cyan-400',
-    },
-    {
-      role: 'Frontend Engineer',
-      company: 'Neon Labs',
-      period: '2021 — 2023',
-      desc: 'Built component libraries and high-performance interfaces for SaaS platforms.',
-      hue: 'from-violet-400 to-indigo-400',
-    },
-    {
-      role: 'Web Developer',
-      company: 'Freelance',
-      period: '2019 — 2021',
-      desc: 'Launched bespoke sites for startups with emphasis on design systems and DX.',
-      hue: 'from-emerald-400 to-teal-400',
-    },
-  ];
-
+export default function Projects() {
   return (
-    <section id="experience" className="relative pt-24">
+    <section id="projects" className="relative py-24">
+      <div className="absolute inset-0 pointer-events-none opacity-40 [mask-image:radial-gradient(50%_50%_at_50%_0%,black,transparent)]">
+        <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/10 via-transparent to-fuchsia-500/10" />
+      </div>
       <div className="mx-auto max-w-7xl px-4">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -140,71 +119,16 @@ function ExperienceTimeline() {
           transition={{ duration: 0.6 }}
           className="text-2xl md:text-4xl font-semibold"
         >
-          Experience
+          Projects
         </motion.h2>
-        <p className="mt-2 text-white/60 max-w-2xl">A 3D-inspired journey through roles and responsibilities.</p>
+        <p className="mt-2 text-white/60 max-w-2xl">Interactive 3D showcases. Hover to tilt, click to reveal details.</p>
 
-        <div className="relative mt-10">
-          <div className="absolute left-4 md:left-1/2 -translate-x-0 md:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-white/0 via-white/20 to-white/0" />
-          <div className="space-y-8">
-            {items.map((it, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 24, rotateX: -8 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.6, delay: i * 0.05 }}
-                className="relative md:grid md:grid-cols-2 md:gap-10"
-              >
-                <div className={`order-2 md:order-${i % 2 === 0 ? '1' : '2'}`} />
-                <div className={`relative order-1 md:order-${i % 2 === 0 ? '2' : '1'} rounded-xl p-6 bg-white/[0.04] border border-white/10 backdrop-blur-md`}
-                  style={{ transformStyle: 'preserve-3d' }}
-                >
-                  <div className={`absolute -inset-px rounded-xl bg-gradient-to-r ${it.hue} opacity-0 hover:opacity-20 blur transition pointer-events-none`} />
-                  <div className="absolute -left-3 top-6 md:left-1/2 md:-translate-x-1/2 w-6 h-6 rounded-full bg-white/10 border border-white/20 shadow-[0_0_24px_rgba(255,255,255,0.25)]" />
-                  <div className="relative">
-                    <div className="text-sm text-white/60">{it.period}</div>
-                    <div className="mt-1 text-lg font-semibold">{it.role} · <span className="text-white/80">{it.company}</span></div>
-                    <p className="mt-2 text-white/70">{it.desc}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {projectData.map((p, idx) => (
+            <ProjectCard key={p.title} p={p} idx={idx} />
+          ))}
         </div>
       </div>
     </section>
-  );
-}
-
-export default function Projects() {
-  return (
-    <>
-      <section id="projects" className="relative py-24">
-        <div className="absolute inset-0 pointer-events-none opacity-40 [mask-image:radial-gradient(50%_50%_at_50%_0%,black,transparent)]">
-          <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/10 via-transparent to-fuchsia-500/10" />
-        </div>
-        <div className="mx-auto max-w-7xl px-4">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-2xl md:text-4xl font-semibold"
-          >
-            Projects
-          </motion.h2>
-          <p className="mt-2 text-white/60 max-w-2xl">Interactive 3D showcases. Hover to tilt, click to reveal details.</p>
-
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {projectData.map((p, idx) => (
-              <ProjectCard key={p.title} p={p} idx={idx} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <ExperienceTimeline />
-    </>
   );
 }

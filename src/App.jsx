@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import Landing from './components/Landing';
 import TechTools from './components/TechTools';
 import Projects from './components/Projects';
+import Experience from './components/Experience';
 import Contact from './components/Contact';
 
 export default function App() {
   useEffect(() => {
-    // Set a dark, neon-friendly background for the app root
     document.body.classList.add('bg-[#05060a]', 'text-white', 'antialiased');
     return () => {
       document.body.classList.remove('bg-[#05060a]', 'text-white', 'antialiased');
@@ -32,6 +32,7 @@ export default function App() {
         <Landing />
         <TechTools />
         <Projects />
+        <Experience />
         <Contact />
       </main>
 
